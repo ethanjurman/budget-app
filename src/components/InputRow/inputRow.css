@@ -1,0 +1,19 @@
+*:focus {
+    outline: none;
+}
+
+.Input > input[type="text"] {
+  float: left;
+  transition: all 0.25s;
+  font-family: monospace;
+  border: none;
+  font-size: 1em;
+  width: inherit;
+  border-bottom: solid 2px;
+  margin-left: 30px;
+}
+
+.Input > input[type="text"]:focus {
+  border: none;
+  border-bottom: solid 5px;
+}

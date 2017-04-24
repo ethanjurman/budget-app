@@ -1,0 +1,17 @@
+.Bar {
+  width: 90%;
+  height: 20px;
+  background: lightgray;
+  margin: 10px;
+  transition: all 0.25s;
+}
+
+.BarPart {
+  height: 20px;
+  transition: all 0.25s;
+  float: left;
+}
+
+.BarPart:hover {
+  height: 30px;
+}

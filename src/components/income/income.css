@@ -1,0 +1,28 @@
+/* green #4caf50 */
+
+*:focus {
+    outline: none;
+}
+
+.IncomeInputExpandField {
+  display: inline-block;
+}
+
+.IncomeInputExpandField > input[type="text"] {
+  transition: all 0.25s;
+  font-family: monospace;
+  font-size: 1em;
+  color: green;
+  border: none;
+  width: inherit;
+  border-bottom: solid 2px #4caf50;
+}
+
+.IncomeInputExpandField > input[type="text"]:focus {
+  border: none;
+  border-bottom: solid 5px #4caf50;
+}
+
+.income-text {
+  color: #4caf50;
+}
