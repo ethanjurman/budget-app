@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Input from './Input';
 import ColorSelector from '../ColorSelector/ColorSelector';
+import { genNextColor } from '../ColorSelector/colors';
 import './inputRow.css';
 
 export default class InputRow extends Component {

@@ -4,14 +4,13 @@ import './bar.css';
 
 const sumItems = (sum, item) => sum + item.value;
 
-export default class SplitBar extends Component {
-
+class SplitBar extends Component {
   itemSum() {
-    return this.props.items.reduce(sumItems, 0);
+    return this.props.items.reduce(sumItems, 0)
   }
 
   isOverLimit() {
-    return this.props.total <= this.itemSum.bind(this);
+    return this.props.total <= this.itemSum.bind(this)
   }
 
   renderBarPart(item) {
@@ -34,7 +33,7 @@ export default class SplitBar extends Component {
         key={'leftOver'}
         className="BarPart"
         style={{
-          width: (this.props.total - this.itemSum()) / 10 + "%",
+          width: (1 - (this.itemSum() / this.props.total)) * 100 + "%",
           background: colors.GRAY
         }}
       />
@@ -54,3 +53,5 @@ export default class SplitBar extends Component {
     )
   }
 }
+
+export default SplitBar;
