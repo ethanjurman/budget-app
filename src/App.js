@@ -20,7 +20,7 @@ class App extends Component {
     const rows = this.props.store.getStoreValue('INPUT_ROWS', []);
     return rows.map((item) => {
       return {
-        name: item.InputRowId,
+        name: item.name,
         value: item.value,
         color: item.color,
       };

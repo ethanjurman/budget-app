@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import colors from '../ColorSelector/colors';
 import './bar.css';
 
-const sumItems = (sum, item) => sum + item.value;
+const sumItems = (sum, item) => sum + +item.value;
 
 class SplitBar extends Component {
   itemSum() {

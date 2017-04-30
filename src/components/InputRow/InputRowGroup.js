@@ -22,13 +22,14 @@ function addInputRow() {
   store.setStoreValue(INPUT_ROWS, rows);
 }
 
-function onUpdateFunc(rowId) {
+function shouldAddRow(rowId) {
   const store = new Store.Store();
   const rows = store.getStoreValue(INPUT_ROWS, []);
   const lastRow = rows[rows.length - 1];
   if (lastRow && rowId === lastRow.InputRowId) {
     return addInputRow();
   }
+  return null;
 }
 
 function rowsToMap(rowMap, row) {
@@ -37,20 +38,24 @@ function rowsToMap(rowMap, row) {
   return rowMap;
 }
 
-function onUpdateName({ rowId, value }) {
+function onUpdate({ rowId, value, key }) {
   const store = new Store.Store();
   const rows = store.getStoreValue(INPUT_ROWS, []);
-  rows.reduce(rowsToMap, {})[rowId].name = value;
+  rows.reduce(rowsToMap, {})[rowId][key] = value;
   store.setStoreValue(INPUT_ROWS, rows);
-  onUpdateFunc(rowId);
+  shouldAddRow(rowId);
 }
 
-function onUpdateValue({ rowId, value }) {
-  const store = new Store.Store();
-  const rows = store.getStoreValue(INPUT_ROWS, []);
-  rows.reduce(rowsToMap, {})[rowId].value = value;
-  store.setStoreValue(INPUT_ROWS, rows);
-  onUpdateFunc(rowId);
+function onUpdateName(values) {
+  onUpdate({ key: 'name', ...values });
+}
+
+function onUpdateValue(values) {
+  onUpdate({ key: 'value', ...values });
+}
+
+function onUpdateColor(values) {
+  onUpdate({ key: 'color', ...values });
 }
 
 function renderInputRow(inputRow) {
@@ -61,6 +66,7 @@ function renderInputRow(inputRow) {
       initialColor={inputRow.color}
       onUpdateName={onUpdateName}
       onUpdateValue={onUpdateValue}
+      onUpdateColor={onUpdateColor}
     />
   );
 }

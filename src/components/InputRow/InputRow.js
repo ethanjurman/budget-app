@@ -14,6 +14,7 @@ class InputRow extends Component {
   }
 
   handleChangeColor(color) {
+    this.props.onUpdateColor({ rowId: this.props.inputRowKey, value: color });
     this.setState({ color });
   }
 
@@ -23,6 +24,7 @@ class InputRow extends Component {
         <ColorSelector
           color={this.state.color}
           onChange={this.handleChangeColor}
+          onUpdate={this.props.onUpdateColor}
         />
         <Input
           color={this.state.color}
@@ -44,6 +46,7 @@ InputRow.propTypes = {
   initialColor: PropTypes.string.isRequired,
   onUpdateName: PropTypes.func.isRequired,
   onUpdateValue: PropTypes.func.isRequired,
+  onUpdateColor: PropTypes.func.isRequired,
 };
 
 export default InputRow;
