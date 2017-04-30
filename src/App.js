@@ -15,6 +15,8 @@ const expenses = [
   { name: 'things', value: 50, color: genNextColor.next().value },
 ];
 
+const newExpenseColor = genNextColor.next().value;
+
 class App extends Component {
   render() {
     if (!this.props.store) {
@@ -24,7 +26,10 @@ class App extends Component {
       <div className="App">
         <IncomeManager />
         <SplitBar items={expenses} total={this.props.store.getStoreValue('income')} />
-        <InputRow initialColor={genNextColor.next().value} />
+        <InputRow
+          inputKey="newExpense"
+          initialColor={newExpenseColor}
+        />
       </div>
     );
   }

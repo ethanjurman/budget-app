@@ -1,16 +1,42 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import colors, { colorKeys } from './colors';
 import './color.css';
 
-const getColorFromIndex = (index) => colors[colorKeys[index]];
+const getColorFromIndex = index => colors[colorKeys[index]];
 
-export default class ColorSelector extends Component {
+const ColorCircleItem = (props) => {
+  const onClick = () => props.onClick(props.index);
+  return (
+    <div
+      className="ColorCircle"
+      onClick={onClick}
+      style={{
+        background: props.color,
+        transform: props.rotation,
+        zIndex: props.zIndex,
+      }}
+    />
+  );
+};
+
+ColorCircleItem.propTypes = {
+  index: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+  color: PropTypes.string.isRequired,
+  rotation: PropTypes.string.isRequired,
+  zIndex: PropTypes.string.isRequired,
+};
+
+class ColorSelector extends Component {
   constructor(props) {
     super(props);
     this.state = {
       color: props.color,
-      open: false
-    }
+      open: false,
+    };
+    this.handleToggleOpen = this.handleToggleOpen.bind(this);
+    this.renderColors = this.renderColors.bind(this);
   }
 
   handleToggleOpen(index) {
@@ -18,7 +44,7 @@ export default class ColorSelector extends Component {
 
     this.setState({
       open: !this.state.open,
-      color: newColor
+      color: newColor,
     });
 
     if (this.props.onChange) {
@@ -30,21 +56,19 @@ export default class ColorSelector extends Component {
     let rotation = 'rotate(0deg)';
     let zIndex = '';
     if (this.state.open) {
-      rotation = 'rotate(' + (index * 30) + 'deg)';
+      rotation = `rotate(${index * 30}deg)`;
     }
     if (this.state.color === getColorFromIndex(index)) {
       zIndex = '10';
     }
     return (
-      <div
+      <ColorCircleItem
         key={index}
-        className="ColorCircle"
-        onClick={this.handleToggleOpen.bind(this, index)}
-        style={{
-          background: color,
-          transform: rotation,
-          zIndex
-        }}
+        index={index}
+        color={color}
+        onClick={this.handleToggleOpen}
+        rotation={rotation}
+        zIndex={zIndex}
       />
     );
   }
@@ -54,8 +78,15 @@ export default class ColorSelector extends Component {
       <div className="ColorSelector">
         {colorKeys
           .map(color => colors[color])
-          .map(this.renderColors.bind(this))}
+          .map(this.renderColors)}
       </div>
-    )
+    );
   }
 }
+
+ColorSelector.propTypes = {
+  color: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
+export default ColorSelector;

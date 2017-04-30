@@ -11,7 +11,7 @@ class IncomeInputExpandField extends Component {
   }
 
   updateStoreIncome({ target: { value } }) {
-    this.props.store.setStore('income', +value);
+    this.props.store.setStoreValue('income', +value);
     console.log(this.props.store.getStoreValue('income'));
   }
 

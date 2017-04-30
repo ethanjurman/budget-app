@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Input from './Input';
 import ColorSelector from '../ColorSelector/ColorSelector';
-import { genNextColor } from '../ColorSelector/colors';
 import './inputRow.css';
 
-export default class InputRow extends Component {
+class InputRow extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      color: props.initialColor
-    }
+      color: props.initialColor,
+    };
+    this.handleChangeColor = this.handleChangeColor.bind(this);
   }
 
   handleChangeColor(color) {
-    this.setState({color});
+    this.setState({ color });
   }
 
   render() {
@@ -21,10 +22,20 @@ export default class InputRow extends Component {
       <div className="InputRow">
         <ColorSelector
           color={this.state.color}
-          onChange={this.handleChangeColor.bind(this)}
+          onChange={this.handleChangeColor}
         />
-        <Input color={this.state.color}/>
+        <Input
+          color={this.state.color}
+          inputKey={this.props.inputKey}
+        />
       </div>
     );
   }
 }
+
+InputRow.propTypes = {
+  inputKey: PropTypes.string.isRequired,
+  initialColor: PropTypes.string.isRequired,
+};
+
+export default InputRow;
