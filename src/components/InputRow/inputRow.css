@@ -17,3 +17,8 @@
   border: none;
   border-bottom: solid 5px;
 }
+
+.InputRow {
+  display: -webkit-box;
+  margin: 20px 0px;
+}

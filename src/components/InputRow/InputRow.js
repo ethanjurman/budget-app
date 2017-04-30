@@ -26,7 +26,13 @@ class InputRow extends Component {
         />
         <Input
           color={this.state.color}
-          inputKey={this.props.inputKey}
+          inputKey={this.props.inputRowKey}
+          onUpdate={this.props.onUpdateName}
+        />
+        <Input
+          color={this.state.color}
+          inputKey={this.props.inputRowKey}
+          onUpdate={this.props.onUpdateValue}
         />
       </div>
     );
@@ -34,8 +40,10 @@ class InputRow extends Component {
 }
 
 InputRow.propTypes = {
-  inputKey: PropTypes.string.isRequired,
+  inputRowKey: PropTypes.string.isRequired,
   initialColor: PropTypes.string.isRequired,
+  onUpdateName: PropTypes.func.isRequired,
+  onUpdateValue: PropTypes.func.isRequired,
 };
 
 export default InputRow;

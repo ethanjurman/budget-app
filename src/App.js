@@ -4,10 +4,8 @@ import './App.css';
 import SplitBar from './components/SplitBar/SplitBar';
 import { genNextColor } from './components/ColorSelector/colors';
 import IncomeManager from './components/income/IncomeManager';
+import InputRowGroup from './components/InputRow/InputRowGroup';
 import * as Store from './store/store';
-
-// import Input from './components/InputRow/Input';
-import InputRow from './components/InputRow/InputRow';
 
 const expenses = [
   { name: 'food', value: 100, color: genNextColor.next().value },
@@ -18,6 +16,16 @@ const expenses = [
 const newExpenseColor = genNextColor.next().value;
 
 class App extends Component {
+  getExpenses() {
+    const rows = this.props.store.getStoreValue('INPUT_ROWS', []);
+    return rows.map((item) => {
+      return {
+        name: item.InputRowId,
+        value: item.value,
+        color: item.color,
+      };
+    });
+  }
   render() {
     if (!this.props.store) {
       return null;
@@ -25,11 +33,8 @@ class App extends Component {
     return (
       <div className="App">
         <IncomeManager />
-        <SplitBar items={expenses} total={this.props.store.getStoreValue('income')} />
-        <InputRow
-          inputKey="newExpense"
-          initialColor={newExpenseColor}
-        />
+        <SplitBar items={this.getExpenses()} total={this.props.store.getStoreValue('income')} />
+        <InputRowGroup />
       </div>
     );
   }

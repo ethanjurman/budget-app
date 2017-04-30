@@ -7,12 +7,12 @@ const Input = (props) => {
   const textValue = props.store.getStoreValue(props.inputKey, '');
   const onUpdateText = ({ target: { value } }) => {
     props.store.setStoreValue(props.inputKey, value);
+    props.onUpdate({ rowId: props.inputKey, value });
   };
   return (
     <div className="Input">
       <input
         type="text"
-        onKeyDown={onUpdateText}
         onKeyUp={onUpdateText}
         style={{
           color: props.color,
@@ -30,6 +30,7 @@ Input.propTypes = {
   inputKey: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   store: PropTypes.instanceOf(Store.Store).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 export default Store.connect(Input);
