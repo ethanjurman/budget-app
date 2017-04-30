@@ -19,6 +19,7 @@ const Input = (props) => {
           borderBottomColor: props.color,
           width: `${(textValue.length + 1) * 16}px`,
           minWidth: '160px',
+          maxWidth: '400px',
         }}
       />
     </div>
